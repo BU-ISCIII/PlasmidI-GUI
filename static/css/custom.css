@@ -1,0 +1,81 @@
+// Custom drylab css
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+.lead {
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+}
+code, pre {
+	font-family: 'Source Code Pro', Consolas, Courier, monospace;
+}
+code {
+	color: #444;
+	white-space: nowrap;
+    background-color: #f7f0e9;
+}
+pre {
+	background-color: #f8f8f8;
+}
+pre code {
+	overflow: auto;
+	word-wrap: normal;
+	white-space: pre;
+}
+blockquote {
+	background-color: #e6e9e9;
+	border-left: 2px solid #ced8de;
+	font-size: 0.9em;
+}
+.intro, .intro-dl {
+  font-size: 90%;
+}
+.intro-dl dl {
+  margin-bottom: 0;
+}
+.panel-btn, .btn {
+  -webkit-transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s;
+  -o-transition: background-color 0.1s;
+  -ms-transition: background-color 0.1s;
+  transition: background-color 0.1s;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+}
+.panel-btn:visited, .btn:visited, .panel-btn:active, .btn:active, .panel-btn:focus, .btn:focus {
+  color: #333 !important;
+}
+.panel-btn {
+  display:block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding:12px;
+  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.panel-btn:hover, .panel-btn:active, .panel-btn:focus {
+  background-color: #e6e6e6;
+  text-decoration: none;
+  border-color: #adadad;
+}
+.panel-btn .fa {
+  font-size: 4em;
+  height: 92px;
+  width: 92px;
+}
+.panel-btn-info .fa { color: #5bc0de; }
+.panel-btn-info { border-bottom: 1px solid #46b8da; }
+.panel-btn-info:hover, .panel-btn-info:active, .panel-btn-info:focus { border-bottom: 1px solid #269abc; background-color: #d9edf7;  }
+
+.panel-btn-primary .fa { color: #337ab7; }
+.panel-btn-primary { border-bottom: 1px solid #2e6da4; }
+.panel-btn-primary:hover, .panel-btn-primary:active, .panel-btn-primary:focus { border-bottom: 1px solid #204d74; background-color: #e5ecf2; }
+
+.panel-btn-success .fa { color: #5cb85c; }
+.panel-btn-success { border-bottom: 1px solid #4cae4c; }
+.panel-btn-success:hover, .panel-btn-success:active, .panel-btn-success:focus { border-bottom: 1px solid #398439; background-color: #dff0d8; }

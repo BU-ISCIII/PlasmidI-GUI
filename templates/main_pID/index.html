@@ -1,0 +1,84 @@
+{% extends 'main_pID/base.html' %}
+{% load static %}
+{% block content %}
+    <h2>PlasmidID</h2>
+	 <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 intro">
+        <p class="lead">Cluster Flow is designed to be quick and easy to install,
+          with flexible configuration and simple customization.</p>
+        <p>It's easy enough to set up and use for non-bioinformaticians (given a basic
+          knowledge of the command line), and it's simplicity makes it great for low
+          to medium throughput analyses.</p>
+      </div>
+      <div class="col-sm-8 col-md-4">
+            <img class="promo-block-img img-responsive" src="{% static "img/illumina/nextseqReduced.png" %}" align="Avatar">
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-6 intro-dl">
+        <dl class="dl-horizontal">
+          <dt>Simple</dt>
+          <dd>Installation walkthroughs and a large module toolset mean you get up and running quickly.</dd>
+
+          <dt>Powerful</dt>
+          <dd>Comes packaged with support for 24 different bioinformatics tools (RNA, ChIP, Bisulfite and more).</dd>
+        </dl>
+      </div>
+      <div class="col-md-6 intro-dl">
+        <dl class="dl-horizontal">
+          <dt>Flexibile</dt>
+          <dd>Pipelines are fast to assemble, making it trivial to change on the fly.</dd>
+
+          <dt>Traceable</dt>
+          <dd>Commands, software versions, everything is logged for reproducability.</dd>
+
+          <!-- <dt>Extensible</dt>
+          <dd>Helper functions and commented examples make writing your own modules easy.</dd> -->
+        </dl>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <a class="panel-btn panel-btn-info" href="https://github.com/BU-ISCIII/plasmidID/wiki">
+          <i class="fa fa-book"></i><br>
+          Read the docs
+        </a>
+        <span class="visible-xs">&nbsp;</span>
+      </div>
+      <div class="col-sm-4">
+        <a class="panel-btn panel-btn-primary" href="#">
+          <i class="fa fa-download"></i><br>
+          Download v1.0
+        </a>
+        <span class="visible-xs">&nbsp;</span>
+      </div>
+      <div class="col-sm-4">
+        <a class="panel-btn panel-btn-success" href="https://github.com/BU-ISCIII/plasmidID">
+          <i class="fa fa-github"></i><br>
+          PlasmidID on GitHub
+        </a>
+      </div>
+
+    <h2>Publication</h2>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Cluster Flow is in Press on GenomeResearch - see below for details. If you use PlasmidID for your
+          research, please consider citing the paper.</p>
+        <blockquote>
+          <strong>PlasmidID: a mapping based tool for plasmid identification, annotation, classification and representation. Application as high-risk strains plasmid detection.</strong><br/>
+          Pedro J. Sola-Campoy, Sara Monzón, María Pérez-Vázquez, Belén Aracil, José Campos, Jesús Oteo, Isabel Cuesta<br/>
+          <em>GenomeResearch</em> 2018, <strong>X</strong>X <br/>
+          doi: <a href="#" target="_blank">XXXXXXX</a>
+        </blockquote>
+        <!--<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+        <div data-badge-details="right" data-badge-type="medium-donut" data-doi="10.12688/f1000research.6005.2" class="altmetric-embed"></div>-->
+
+      </div>
+    </div>
+    </div>
+{% endblock %}
