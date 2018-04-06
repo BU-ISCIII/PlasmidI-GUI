@@ -10,3 +10,7 @@ import pdb
 # Create your views here.
 def index(request):
     return render(request, 'main_pID/index.html')
+
+
+def pIDWeb(request):
+    return render(request, 'main_pID/pidweb_form.html')

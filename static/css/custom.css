@@ -30,8 +30,9 @@ blockquote {
 	border-left: 2px solid #ced8de;
 	font-size: 0.9em;
 }
+
 .intro, .intro-dl {
-  font-size: 90%;
+  font-size: 80%;
 }
 .intro-dl dl {
   margin-bottom: 0;
@@ -68,14 +69,14 @@ blockquote {
   height: 92px;
   width: 92px;
 }
-.panel-btn-info .fa { color: #5bc0de; }
-.panel-btn-info { border-bottom: 1px solid #46b8da; }
-.panel-btn-info:hover, .panel-btn-info:active, .panel-btn-info:focus { border-bottom: 1px solid #269abc; background-color: #d9edf7;  }
+.panel-btn-info .fa { color: #ad3e62; }
+.panel-btn-info { border-bottom: 1px solid #ad3e62; }
+.panel-btn-info:hover, .panel-btn-info:active, .panel-btn-info:focus { border-bottom: 1px solid #ad3e62; background-color: #d098aa;  }
 
 .panel-btn-primary .fa { color: #337ab7; }
 .panel-btn-primary { border-bottom: 1px solid #2e6da4; }
-.panel-btn-primary:hover, .panel-btn-primary:active, .panel-btn-primary:focus { border-bottom: 1px solid #204d74; background-color: #e5ecf2; }
+.panel-btn-primary:hover, .panel-btn-primary:active, .panel-btn-primary:focus { border-bottom: 1px solid #204d74; background-color: #b0cae0; }
 
-.panel-btn-success .fa { color: #5cb85c; }
-.panel-btn-success { border-bottom: 1px solid #4cae4c; }
-.panel-btn-success:hover, .panel-btn-success:active, .panel-btn-success:focus { border-bottom: 1px solid #398439; background-color: #dff0d8; }
+.panel-btn-success .fa { color: #323532; }
+.panel-btn-success { border-bottom: 1px solid #323532; }
+.panel-btn-success:hover, .panel-btn-success:active, .panel-btn-success:focus { border-bottom: 1px solid #323532; background-color: #ccc; }
