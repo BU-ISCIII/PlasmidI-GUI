@@ -37,7 +37,7 @@ blockquote {
 .intro-dl dl {
   margin-bottom: 0;
 }
-.panel-btn, .btn {
+.panel-btn {
   -webkit-transition: background-color 0.1s;
   -moz-transition: background-color 0.1s;
   -o-transition: background-color 0.1s;
