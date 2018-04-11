@@ -7,11 +7,14 @@ from django.conf import settings
 
 from . import views
 from django.conf.urls.static import static
-from django.views.generic import ListView, DetailView
+from .views import pIDWebView,FileDeleteView,FileListView
 
 urlpatterns = [
      path('', views.index, name='index'),
-     path('pIDWeb', views.pIDWeb, name='pIDWeb'),
+     #path('pIDWeb', views.pIDWeb, name='pIDWeb'),
+     path('pIDWeb',pIDWebView.as_view(),name="run-job"),
+     path('delete/<int:pk>', FileDeleteView.as_view(), name='upload-delete'),
+     path('view', FileListView.as_view(), name='upload-view'),
 ]
 
 if settings.DEBUG:
