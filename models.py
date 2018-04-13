@@ -20,11 +20,11 @@ class Jobs(models.Model):
         return ('upload-new', )
 
     def save(self, *args, **kwargs):
-        #pdb.set_trace()
         #self.job_id = "1"
         super(Jobs, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """delete -- Remove to leave file."""
         self.file_R1.delete(False)
+        self.file_R2.delete(False)
         super(Jobs, self).delete(*args, **kwargs)

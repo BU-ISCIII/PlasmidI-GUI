@@ -73,6 +73,7 @@ $(function () {
         }).always(function () {
             $(this).removeClass('fileupload-processing');
         }).done(function (result) {
+        	console.log(result)
             $(this).fileupload('option', 'done')
                 .call(this, null, {result: result});
         });

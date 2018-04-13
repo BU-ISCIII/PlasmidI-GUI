@@ -27,25 +27,26 @@ class pIDWebView(CreateView):
     model = Jobs
     fields = ('file_R1','file_R2',)
     exclude = ['job_id',]
-    template_name = "main_pID/pidweb_form.html"
+    template_name = "main_pID/pidweb_form2.html"
 
     def form_valid(self, form):
-        pdb.set_trace()
         self.object = form.save()
-        files = [serialize(self.object)]
-        data = {'files': files}
+        file_R1 = [serialize(self.object,file_attr="file_R1")]
+        file_R2 = [serialize(self.object,file_attr="file_R2")]
+
+        data = {'files': file_R1 + file_R2}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
     def form_invalid(self, form):
         data = json.dumps(form.errors)
-        pdb.set_trace()
+        #pdb.set_trace()
         return HttpResponse(content=data, status=400, content_type='application/json')
 
 class FileDeleteView(DeleteView):
     model = Jobs
-    template_name = "main_pID/pidweb_form.html"
+    template_name = "main_pID/pidweb_form2.html"
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -54,13 +55,16 @@ class FileDeleteView(DeleteView):
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
-class FileListView(ListView):
-    model = Jobs
-    template_name = "main_pID/pidweb_form.html"
-
-    def render_to_response(self, context, **response_kwargs):
-        files = [ serialize(p) for p in self.get_queryset() ]
-        data = {'files': files}
-        response = JSONResponse(data, mimetype=response_mimetype(self.request))
-        response['Content-Disposition'] = 'inline; filename=files.json'
-        return response
+# class FileListView(ListView):
+#     model = Jobs
+#     template_name = "main_pID/pidweb_form2.html"
+# #
+#     def render_to_response(self, context, **response_kwargs):
+#         file_R1 = [ serialize(p,file_attr="file_R1") for p in self.get_queryset() ]
+#         file_R2 = [ serialize(p,file_attr="file_R2") for p in self.get_queryset() ]
+#         files = file_R1 + file_R2
+#         #pdb.set_trace()
+#         data = {'files':files}
+#         response = JSONResponse(data, mimetype=response_mimetype(self.request))
+#         response['Content-Disposition'] = 'inline; filename=files.json'
+#         return response

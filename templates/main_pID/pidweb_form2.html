@@ -27,34 +27,19 @@
 							<span>Add files R2...</span>
 							<input type="file" name="file_R2">
 						</span>
-						<button type="submit" class="btn btn-primary start">
+						<button class="btn btn-primary start">
 							<i class="glyphicon glyphicon-upload"></i>
 							<span>Start upload</span>
 						</button>
-						<button type="reset" class="btn btn-warning cancel">
-							<i class="glyphicon glyphicon-ban-circle"></i>
-							<span>Cancel upload</span>
-						</button>
-						<button type="button" class="btn btn-danger delete">
-							<i class="glyphicon glyphicon-trash"></i>
-							<span>Delete</span>
-						</button>
-						<input type="checkbox" class="toggle">
-						<!-- The loading indicator is shown during file processing -->
-						<span class="fileupload-loading"></span>
-					</div>
-					<!-- The global progress information -->
-					<div class="col-lg-5 fileupload-progress fade">
-						<!-- The global progress bar -->
-						<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-							<div class="progress-bar progress-bar-success" style="width:0%;"></div>
-						</div>
-						<!-- The extended global progress information -->
-						<div class="progress-extended">&nbsp;</div>
 					</div>
 				</div>
+				<!-- The global progress bar -->
+				<div id="progress" class="progress">
+						<div class="progress-bar progress-bar-success"></div>
+				</div>
 				<!-- The table listing the files available for upload/download -->
-				<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+    			<div id="f" class="files"></div>
+				<!--<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>-->
 			</form>
 		</div>
 	</div>
@@ -71,7 +56,7 @@
 		</div>
 	</div>
 </div>
-{% upload_js %}
+<!--{% upload_js %}-->
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="{% static "/js/vendor/jquery.ui.widget.js" %}"></script>
 <!-- The Templa static "tes plugin is included to render the upload/download listings -->
@@ -99,29 +84,99 @@
 <!-- The File U static "pload validation plugin -->
 <script src="{% static "/js/jquery.fileupload-validate.js" %}"></script>
 <!-- The File U static "pload user interface plugin -->
-<script src="{% static "/js/jquery.fileupload-ui.js" %}"></script>
+<!--<script src="{% static "/js/jquery.fileupload-ui.js" %}"></script>-->
 <!-- The main a static "pplication script -->
-<script src="{% static "/js/main.js" %}"></script>
 <script src="{% static "/js/locale.js" %}"></script>
 <script src="{% static "/js/csrf.js" %}"></script>
+<script src="{% static "js/jquery.cookie.js" %}"></script>
 <script>
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
 $(document).ready(function(){
-    var filesList = [],
-        paramNames = [],
-        elem = $("form");
-    file_upload = elem.fileupload({
+    var csrftoken = $.cookie('csrftoken');
+    var filesList = [];
+    paramNames = [];
+    context = "";
+    //elem = $("form");
+    $("#fileupload").fileupload({
+        url: '/pIDWeb',
+        //crossDomain: false,
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        dataType: 'json',
         autoUpload: false,
+        maxNumberOfFiles: 2,
+        sequentialUploads: true,
+        acceptFileTypes: /(\.|\/)(pdf)$/i,
+        maxFileSize: 4000000000, // 4G
         fileInput: $("input:file"),
-    }).on("fileuploadadd", function(e, data){
+    }).on('fileuploadadd', function(e, data){
         filesList.push(data.files[0]);
-        console.log(data.paramName)
+		//console.log(data.paramName);
         paramNames.push(data.paramName);
-    });
+        data.context = $('<div/>').appendTo('#f');
+        $.each(data.files, function (index, file) {
+            var node = $('<p/>')
+                    .append($('<span/>').text(file.name));
+            node.appendTo(data.context);
+        context = data.context;
+    	});
+
+    }).on('fileuploadprocessalways', function (e, data) {
+        var index = data.index,
+            file = data.files[index],
+            node = $(data.context.children()[index]);
+        if (file.preview) {
+            node
+                .prepend('<br>')
+                .prepend(file.preview);
+        }
+        if (file.error) {
+            node
+                .append('<br>')
+                .append(file.error);
+        }
+        if (index + 1 === data.files.length) {
+            data.context.find('button')
+                .text('Upload')
+                .prop('disabled', !!data.files.error);
+        }
+    }).on('fileuploadprogressall', function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+    }).on('fileuploaddone', function (e, data) {
+        $.each(data.result.files, function (index, file) {
+            var node = $('<p/>')
+                    .append($('<span/>').text("Upload succesfully completed!"));
+            node.appendTo(data.context);
+			//console.log(data)
+			//debugger;
+        });
+    }).on('fileuploadfail', function (e, data) {
+        $.each(data.result.files, function (index, file) {
+            var error = $('<span/>').text(file.error);
+            $(data.context.children()[index])
+                .append('<br>')
+                .append(error);
+        });
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
     $("button").click(function(e){
         e.preventDefault();
-        file_upload.fileupload('send', {files:filesList, paramName: paramNames});
-    })
-})
+		console.log(filesList);
+        $('#fileupload').fileupload('send', {files:filesList, paramName: paramNames,context:context});
+    });
+});
 </script>
 {% endblock %}
